@@ -10,15 +10,18 @@ import { loginActions } from '../../model/slice/loginSlice';
 import cls from './LoginForm.module.scss';
 import { getLoginState } from '../../model/selectors/getLoginState/getLoginState';
 
-interface LoginFormProps {
+export interface LoginFormProps {
     className?: string;
 }
 
-export const LoginForm = memo(({ className }: LoginFormProps) => {
+const LoginForm = memo(({ className }: LoginFormProps) => {
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const {
-        username, password, error, isLoading,
+        username,
+        password,
+        error,
+        isLoading,
     } = useSelector(getLoginState);
 
     const onChangeUsername = useCallback((value: string) => {
@@ -30,7 +33,10 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
     }, [dispatch]);
 
     const onLoginClick = useCallback(() => {
-        dispatch(loginByUsername({ username, password }));
+        dispatch(loginByUsername({
+            username,
+            password,
+        }));
     }, [dispatch, password, username]);
 
     return (
@@ -63,3 +69,5 @@ export const LoginForm = memo(({ className }: LoginFormProps) => {
         </div>
     );
 });
+
+export default LoginForm;
