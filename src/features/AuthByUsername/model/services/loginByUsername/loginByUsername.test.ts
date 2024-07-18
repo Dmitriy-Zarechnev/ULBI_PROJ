@@ -1,7 +1,5 @@
 import axios from 'axios';
-import { Dispatch } from '@reduxjs/toolkit';
-import { StateSchema } from 'app/providers/StoreProvider';
-import { User, userActions } from 'entities/User';
+import { userActions } from 'entities/User';
 import { TestAsyncThunk } from 'shared/lib/tests/testAsyncThunk/TestAsyncThunk';
 import { loginByUsername } from './loginByUsername';
 
@@ -10,14 +8,6 @@ jest.mock('axios');
 const mockedAxios = jest.mocked(axios, true);
 
 describe('loginByUsername', () => {
-    // let dispatch: Dispatch;
-    // let getState: () => StateSchema;
-    //
-    // beforeEach(() => {
-    //     dispatch = jest.fn();
-    //     getState = jest.fn();
-    // });
-
     test('positive thunk test', async () => {
         const userData = { username: 'username', id: '1' };
         mockedAxios.post.mockReturnValue(Promise.resolve({ data: userData }));
